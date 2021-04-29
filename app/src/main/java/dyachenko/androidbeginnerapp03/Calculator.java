@@ -44,7 +44,7 @@ public class Calculator {
     }
 
     public String getLeftOperand() {
-        return leftOperand.toString() + " " + getOperationString();
+        return leftOperand.toString() + getOperationString();
     }
 
     public void handle(String tag, String text) {
@@ -91,7 +91,9 @@ public class Calculator {
                 rightToLeft();
                 clearRight();
             }
-            this.operation = op;
+            if (!leftIsEmpty()) {
+                this.operation = op;
+            }
         }
     }
 
@@ -99,9 +101,8 @@ public class Calculator {
         if (leftOperand.length() == 0 || rightOperand.length() == 0 || operation == null) {
             return;
         }
-        int a = Integer.parseInt(leftOperand.toString());
-        int b = Integer.parseInt(rightOperand.toString());
-        int res = doOperation(a, b);
+        int res = doOperation(Integer.parseInt(leftOperand.toString()),
+                Integer.parseInt(rightOperand.toString()));
         clearAll();
         leftOperand.append(res);
         operation = null;
@@ -128,7 +129,7 @@ public class Calculator {
     private void delete() {
         int length = rightOperand.length();
         if (length > 0) {
-            rightOperand.deleteCharAt(length - 1);
+            rightOperand.deleteCharAt(--length);
         }
     }
 
@@ -166,8 +167,12 @@ public class Calculator {
         return rightOperand.length() == 0;
     }
 
+    private boolean leftIsEmpty() {
+        return leftOperand.length() == 0;
+    }
+
     private String getOperationString() {
         String op = mapByOperations.get(operation);
-        return op == null ? "" : op;
+        return op == null ? "" : " " + op;
     }
 }
