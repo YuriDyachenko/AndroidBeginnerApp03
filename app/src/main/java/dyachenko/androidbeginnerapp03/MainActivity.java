@@ -1,5 +1,6 @@
 package dyachenko.androidbeginnerapp03;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ import static dyachenko.androidbeginnerapp03.Operation.XOR;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final String KEY_CALCULATOR_DATA = "KEY_CALCULATOR_DATA";
+    private final String KEY_CALCULATOR_DATA = "EXTRA_CALCULATOR_DATA";
     private TextView tvLeftOperand;
     private TextView tvRightOperand;
     private Calculator calculator;
@@ -57,19 +58,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void createCalculator() {
-        calculator = new Calculator(getResources().getString(R.string.tag_digit_button),
-                getResources().getString(R.string.tag_other_button),
-                getResources().getString(R.string.button_digit_0));
-        calculator.registerOperation(PLUS, getResources().getString(R.string.button_plus));
-        calculator.registerOperation(MINUS, getResources().getString(R.string.button_minus));
-        calculator.registerOperation(MULTIPLY, getResources().getString(R.string.button_multiply));
-        calculator.registerOperation(DIVIDE, getResources().getString(R.string.button_divide));
-        calculator.registerOperation(REST, getResources().getString(R.string.button_rest));
-        calculator.registerOperation(DELETE, getResources().getString(R.string.button_delete));
-        calculator.registerOperation(EQUAL, getResources().getString(R.string.button_equal));
-        calculator.registerOperation(CLEAR, getResources().getString(R.string.button_clear));
-        calculator.registerOperation(CLEARALL, getResources().getString(R.string.button_clear_all));
-        calculator.registerOperation(XOR, getResources().getString(R.string.button_xor));
+        Resources r = getResources();
+        calculator = new Calculator(r.getString(R.string.tag_digit_button),
+                r.getString(R.string.tag_other_button),
+                r.getString(R.string.button_digit_0));
+        calculator.registerOperation(PLUS, r.getString(R.string.button_plus));
+        calculator.registerOperation(MINUS, r.getString(R.string.button_minus));
+        calculator.registerOperation(MULTIPLY, r.getString(R.string.button_multiply));
+        calculator.registerOperation(DIVIDE, r.getString(R.string.button_divide));
+        calculator.registerOperation(REST, r.getString(R.string.button_rest));
+        calculator.registerOperation(DELETE, r.getString(R.string.button_delete));
+        calculator.registerOperation(EQUAL, r.getString(R.string.button_equal));
+        calculator.registerOperation(CLEAR, r.getString(R.string.button_clear));
+        calculator.registerOperation(CLEARALL, r.getString(R.string.button_clear_all));
+        calculator.registerOperation(XOR, r.getString(R.string.button_xor));
     }
 
     private void setOnClickListenerForAllButtons() {

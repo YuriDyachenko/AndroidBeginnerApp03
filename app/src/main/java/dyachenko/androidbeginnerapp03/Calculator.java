@@ -85,12 +85,8 @@ public class Calculator {
     }
 
     public void handleArithmeticOperation(Operation op) {
+        calc();
         if (op != EQUAL) {
-            handleArithmeticOperation(EQUAL);
-        }
-        if (op == EQUAL) {
-            calc();
-        } else {
             if (!rightIsEmpty()) {
                 rightToLeft();
                 clearRight();
